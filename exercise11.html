@@ -1,0 +1,37 @@
+<html>
+    <body>
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <script src="./robot-arm.js"></script>
+        <script>
+            // Initialize the robotArm
+            var canvas = document.getElementById("canvas");
+            var robotArm = new RobotArm(canvas);
+            // Either use loadLevel or randomLevel
+            robotArm.loadLevel("exercise 11");
+            robotArm.speed = 700;
+            // My instructions come here
+            var colors = []
+            for (var i = 0; i < 9; i++) {
+                robotArm.moveRight();
+                robotArm.grab();
+                robotArm.scan();
+                colors.push(robotArm.scan());
+                robotArm.drop();
+            }
+
+            colors.sort();
+            console.log(colors);
+            
+
+            var counts = {};
+            colors.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
+            console.log(counts);
+
+            var highest = Math.max(Math, counts);
+
+            console.log(highest);
+            // Call run to run the animations
+            robotArm.run();
+        </script>
+    </body>
+</html>
